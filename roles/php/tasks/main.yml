@@ -1,0 +1,24 @@
+---
+- name: Install PHP and required modules
+  apt:
+    name:
+      - php8.2-fpm
+      - php8.2-common
+      - php8.2-cli
+      - php8.2-mysql
+      - php8.2-curl
+      - php8.2-xml
+    state: present
+    update_cache: yes
+
+- name: Ensure PHP-FPM is running
+  service:
+    name: php8.2-fpm
+    state: started
+    enabled: yes
+
+- name: Create test PHP file
+  copy:
+    content: "<?php phpinfo(); ?>"
+    dest: "{{ web_root }}/info.php"
+    mode: '0644'

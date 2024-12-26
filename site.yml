@@ -1,0 +1,9 @@
+---
+- name: Install and Configure Nginx with PHP
+  hosts: webservers
+  become: true
+  vars_files:
+    - vars/main.yml
+  roles:
+    - nginx
+    - php
